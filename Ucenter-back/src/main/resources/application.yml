@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: Ucenter-back
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Zz20020106
+    url: jdbc:mysql://localhost:3306/ucenter
+
+server:
+  port: 8080
+
+
