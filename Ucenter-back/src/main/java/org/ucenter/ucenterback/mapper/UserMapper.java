@@ -7,33 +7,22 @@ import java.util.List;
 
 public interface UserMapper {
 
-    @Select("SELECT * FROM user WHERE isDeleted = FALSE")
+    // 查询所有未被删除的用户
     List<User> findAll();
 
-    @Select("SELECT * FROM user WHERE id = #{id} AND isDeleted = FALSE")
+    // 根据 ID 查询未被删除的用户
     User findById(String id);
 
-    @Select("SELECT * FROM user WHERE username = #{username} AND isDeleted = FALSE")
+    // 根据用户名查询未被删除的用户
     User findByUsername(String username);
 
-    @Insert("INSERT INTO user (id, username, avatarUrl, gender, password, phone, email, isValid, isAdmin, createTime, updateTime, isDeleted) " +
-            "VALUES (#{id}, #{username}, #{avatarUrl}, #{gender}, #{password}, #{phone}, #{email}, #{isValid}, #{isAdmin}, #{createTime}, #{updateTime}, #{isDeleted})")
+    // 插入用户
     int insert(User user);
 
-    @Update("UPDATE user SET " +
-            "username = #{username}, " +
-            "avatarUrl = #{avatarUrl}, " +
-            "gender = #{gender}, " +
-            "password = #{password}, " +
-            "phone = #{phone}, " +
-            "email = #{email}, " +
-            "isValid = #{isValid}, " +
-            "isAdmin = #{isAdmin}, " +
-            "updateTime = CURRENT_TIMESTAMP " +
-            "WHERE id = #{id}")
+    // 更新用户信息
     void update(User user);
 
-    @Update("UPDATE user SET isDeleted = TRUE WHERE id = #{id}")
+    // 逻辑删除用户
     void deleteById(String id);
 }
 

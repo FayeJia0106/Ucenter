@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ucenter.ucenterback.mapper.UserMapper">
+
+    <!-- 查询所有未被删除的用户 -->
+    <select id="findAll" resultType="org.ucenter.ucenterback.model.User">
+        SELECT * FROM user WHERE isDeleted = FALSE
+    </select>
+
+    <!-- 根据 ID 查询未被删除的用户 -->
+    <select id="findById" parameterType="String" resultType="org.ucenter.ucenterback.model.User">
+        SELECT * FROM user WHERE id = #{id} AND isDeleted = FALSE
+    </select>
+
+    <!-- 根据用户名查询未被删除的用户 -->
+    <select id="findByUsername" parameterType="String" resultType="org.ucenter.ucenterback.model.User">
+        SELECT * FROM user WHERE username = #{username} AND isDeleted = FALSE
+    </select>
+
+    <!-- 插入用户 -->
+    <insert id="insert" parameterType="org.ucenter.ucenterback.model.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (id, username, avatarUrl, gender, password, phone, email, isValid, isAdmin, createTime, updateTime, isDeleted)
+        VALUES (#{id}, #{username}, #{avatarUrl}, #{gender}, #{password}, #{phone}, #{email}, #{isValid}, #{isAdmin}, #{createTime}, #{updateTime}, #{isDeleted})
+    </insert>
+
+    <!-- 更新用户 -->
+    <update id="update" parameterType="org.ucenter.ucenterback.model.User">
+        UPDATE user SET
+                        username = #{username},
+                        avatarUrl = #{avatarUrl},
+                        gender = #{gender},
+                        password = #{password},
+                        phone = #{phone},
+                        email = #{email},
+                        isValid = #{isValid},
+                        isAdmin = #{isAdmin},
+                        updateTime = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+
+    <!-- 逻辑删除用户 -->
+    <update id="deleteById" parameterType="String">
+        UPDATE user SET isDeleted = TRUE WHERE id = #{id}
+    </update>
+
+</mapper>
