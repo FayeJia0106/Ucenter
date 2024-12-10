@@ -9,7 +9,7 @@
     </select>
 
     <!-- 根据 ID 查询未被删除的用户 -->
-    <select id="findById" parameterType="String" resultType="org.ucenter.ucenterback.model.User">
+    <select id="findById" parameterType="long" resultType="org.ucenter.ucenterback.model.User">
         SELECT * FROM user WHERE id = #{id} AND isDeleted = FALSE
     </select>
 
@@ -20,8 +20,8 @@
 
     <!-- 插入用户 -->
     <insert id="insert" parameterType="org.ucenter.ucenterback.model.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user (id, username, avatarUrl, gender, password, phone, email, isValid, isAdmin, createTime, updateTime, isDeleted)
-        VALUES (#{id}, #{username}, #{avatarUrl}, #{gender}, #{password}, #{phone}, #{email}, #{isValid}, #{isAdmin}, #{createTime}, #{updateTime}, #{isDeleted})
+        INSERT INTO user (id, username, avatarUrl, gender, password, phone, email, isValid, isAdmin, isDeleted)
+        VALUES (#{id}, #{username}, #{avatarUrl}, #{gender}, #{password}, #{phone}, #{email}, #{isValid}, #{isAdmin}, #{isDeleted})
     </insert>
 
     <!-- 更新用户 -->
@@ -40,7 +40,7 @@
     </update>
 
     <!-- 逻辑删除用户 -->
-    <update id="deleteById" parameterType="String">
+    <update id="deleteById" parameterType="long">
         UPDATE user SET isDeleted = TRUE WHERE id = #{id}
     </update>
 

@@ -1,5 +1,7 @@
 package org.ucenter.ucenterback.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
@@ -11,7 +13,8 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 public class User {
-    private String id; // 用户唯一标识
+    @TableId(type = IdType.ASSIGN_ID) // 使用雪花算法生成全局唯一 ID
+    private long id;
     private String username; // 用户名
     private String avatarUrl; // 用户头像 URL
     private Integer gender; // 性别：0-未知，1-男，2-女

@@ -19,21 +19,21 @@ public class TestController {
     @PostMapping("/insertUser")
     public String insertUser() {
         // 使用构建器模式创建用户对象
-        User user = User.builder()
-                .id(UUID.randomUUID().toString())
-                .username("tempuser")
-                .avatarUrl("https://example.com/avatar.png")
-                .gender(2)
-                .password("temppassword")
-                .phone("0987654321")
-                .email("tempuser@example.com")
-                .isValid(true)
-                .isAdmin(false)
-                .build();
-
-        // 插入数据
-        int rowsAffected = userMapper.insert(user);
-        return rowsAffected > 0 ? "用户插入成功！" : "用户插入失败！";
+//        User user = User.builder()
+//                .id(UUID.randomUUID().toString())
+//                .username("tempuser")
+//                .avatarUrl("https://example.com/avatar.png")
+//                .gender(2)
+//                .password("temppassword")
+//                .phone("0987654321")
+//                .email("tempuser@example.com")
+//                .isValid(true)
+//                .isAdmin(false)
+//                .build();
+//
+//        // 插入数据
+//        int rowsAffected = userMapper.insert(user);
+        return "null";
     }
 }
 
